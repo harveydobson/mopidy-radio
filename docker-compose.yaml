@@ -1,0 +1,26 @@
+version: '3'
+services:
+  icecast:
+    build: ./icecast
+    ports:
+      - "8000:8000"
+    environment:
+      - "ICECAST_SOURCE_PASSWORD=mopidy"
+      - "ICECAST_ADMIN_PASSWORD=mopidy"
+      - "ICECAST_PASSWORD=mopidy"
+      - "ICECAST_RELAY_PASSWORD=mopidy"
+  mopidy:
+    #image: "ivdata/mopidy"
+    image: "jaedb/iris"
+    volumes:
+      - /host_mnt/c/docker/mopidy:/root/.config/mopidy
+      - /host_mnt/c/docker/mopidy:/config/
+    ports:
+      - "6680:6680"
+      - "6600:6600"
+    environment:
+      - "SPOTIFY_USERNAME=interwave"
+      - "SPOTIFY_PASSWORD=FSypLblZQT4m"
+      #- "APT_PACKAGES="
+      #- "PIP_PACKAGES="
+  
